@@ -1,0 +1,198 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\engine">
+      <UniqueIdentifier>{93275d5a-080b-4194-9dcc-f4e0eb0a6b95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game">
+      <UniqueIdentifier>{f2f7a695-deab-4c54-83db-df668bfd788e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\engine\library">
+      <UniqueIdentifier>{e56cee6f-0b6d-4092-84fa-4ba9e59ca654}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine">
+      <UniqueIdentifier>{65a79d69-5507-4493-94dd-f11367a98474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game">
+      <UniqueIdentifier>{8cf4db48-c5c2-4928-9ed5-c8347898ab3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\engine\library">
+      <UniqueIdentifier>{70cf80c3-db1f-424d-a745-b6919bd2162d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\game\ui">
+      <UniqueIdentifier>{1011ec88-15b0-44af-ac10-29985641f837}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\game\ui">
+      <UniqueIdentifier>{ebfb76d0-c3c1-4a7e-a2aa-01d9ead6796b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="easylogging++.h">
+      <Filter>Header Files\engine\library</Filter>
+    </ClInclude>
+    <ClInclude Include="pugiconfig.hpp">
+      <Filter>Header Files\engine\library</Filter>
+    </ClInclude>
+    <ClInclude Include="pugixml.hpp">
+      <Filter>Header Files\engine\library</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationListener.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ApplicationSettings.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="DataAsset.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSettings.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceCache.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisGame.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrominoType.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrominoColor.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisBoard.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Tileset.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Tetromino.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Rotation.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Direction.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="EventManager.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStackFlags.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStateMachine.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuHomeScreen.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuAboutScreen.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuHighscoreScreen.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuGameOverScreen.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisMenu.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="Signal.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pugixml.cpp">
+      <Filter>Source Files\engine\library</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="DataAsset.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceCache.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisGame.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="Tileset.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisBoard.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="Tetromino.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="EventManager.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuStateMachine.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuGameOverScreen.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuHighscoreScreen.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuAboutScreen.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuHomeScreen.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="TetrisMenu.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

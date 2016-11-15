@@ -1,0 +1,12 @@
+#Junk Files
+*.opendb
+*.dll
+*.sdf
+*.log
+
+#Junk Folders
+x64*
+.vs*
+Debug*
+Release*
+third_party*

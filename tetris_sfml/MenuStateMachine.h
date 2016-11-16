@@ -31,7 +31,7 @@ namespace tetris
 			void render();
 			void changeState(const std::string &stateID);
 			void pushState(const std::string &stateID);
-			void popState(const std::string &stateID);
+			void popState();
 			void clearAll();
 			std::shared_ptr<tgui::Gui> getGUI() const;
 		};

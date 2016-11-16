@@ -3,13 +3,14 @@
 #include "ResourceCache.h"
 #include "Math.h"
 #include "Application.h"
+#include "GameConstants.h"
 
 using namespace tetris;
 
 TetrisBoard::TetrisBoard()
 {
-	m_moveCooldown = BASE_COOLDOWN;
-	m_cooldownSpeed = BASE_COOLDOWN_SPEED;
+	m_moveCooldown = GameConstants::BASE_COOLDOWN;
+	m_cooldownSpeed = GameConstants::BASE_COOLDOWN_SPEED;
 	m_width = 0;
 	m_height = 0;
 	m_numberOfClearedLines = 0;
@@ -47,6 +48,10 @@ void TetrisBoard::reset()
 	m_level = 1;
 	m_numberOfClearedLines = 0;
 	updateCooldownSpeed();
+
+	scoreChanged.send();
+	levelChanged.send();
+	numberOfClearedLinesChanged.send();
 }
 
 void TetrisBoard::clear()
@@ -131,6 +136,7 @@ void TetrisBoard::addScore(int clearedLines)
 	else if(clearedLines == 1)
 		m_score += 100 * m_level;
 
+	m_score = math::min(m_score, GameConstants::MAX_SCORE);
 	scoreChanged.send();
 }
 
@@ -194,7 +200,7 @@ void TetrisBoard::update(float deltaTime)
 			if(doesTetrominoFit(m_tetromino, newPos))
 			{
 				m_tetrominoPos = newPos;
-				m_moveCooldown = BASE_COOLDOWN;
+				m_moveCooldown = GameConstants::BASE_COOLDOWN;
 			}
 			else
 			{
@@ -258,7 +264,7 @@ bool TetrisBoard::addTetromino(TetrominoType type)
 			{
 				m_isStable = false;
 				success = true;
-				m_moveCooldown = BASE_COOLDOWN;
+				m_moveCooldown = GameConstants::BASE_COOLDOWN;
 			}
 		}
 
@@ -300,9 +306,9 @@ void TetrisBoard::toggleTurboGravity(bool enabled)
 
 void TetrisBoard::updateCooldownSpeed()
 {
-	m_cooldownSpeed = BASE_COOLDOWN_SPEED + (math::min(m_level, 21) - 1) * COOLDOWN_MULTIPLIER_PER_LEVEL;
+	m_cooldownSpeed = GameConstants::BASE_COOLDOWN_SPEED + (math::min(m_level, 21) - 1) * GameConstants::COOLDOWN_MULTIPLIER_PER_LEVEL;
 	if(m_turboCooldownSpeed)
-		m_cooldownSpeed = math::max(TURBO_SPEED, m_cooldownSpeed);
+		m_cooldownSpeed = math::max(GameConstants::TURBO_SPEED, m_cooldownSpeed);
 }
 
 bool TetrisBoard::isStable() const

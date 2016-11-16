@@ -1,6 +1,7 @@
 #include <utility>
 #include "ResourceCache.h"
 #include "DataAsset.h"
+#include "TextAsset.h"
 #include "Tileset.h"
 
 using namespace tetris;
@@ -49,6 +50,22 @@ std::shared_ptr<DataAsset> ResourceCache::loadDataAsset(const std::string& path)
 	{
 		m_dataAssets.insert(std::make_pair(path, dataAsset));
 		return dataAsset;
+	}
+
+	return nullptr;
+}
+
+std::shared_ptr<TextAsset> ResourceCache::loadTextAsset(const std::string& path)
+{
+	auto loadedTextAsset = m_textAssets.find(path);
+	if(loadedTextAsset != m_textAssets.end())
+		return loadedTextAsset->second;
+
+	std::shared_ptr<TextAsset> textAsset = std::make_shared<TextAsset>();
+	if(textAsset->loadFromFile(path))
+	{
+		m_textAssets.insert(std::make_pair(path, textAsset));
+		return textAsset;
 	}
 
 	return nullptr;

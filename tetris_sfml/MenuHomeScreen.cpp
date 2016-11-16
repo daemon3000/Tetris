@@ -1,8 +1,10 @@
 #include "MenuHomeScreen.h"
+#include "MenuStateMachine.h"
 #include "Application.h"
 #include "ResourceCache.h"
 #include "TetrisGame.h"
 #include "Tileset.h"
+#include "MenuStateID.h"
 
 using namespace tetris;
 using namespace tetris::ui;
@@ -27,10 +29,26 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 		m_queuedTetromino.setType(m_game->getQueuedTetromino());
 	});
 
+	m_game->gameOver.connect([this]()
+	{
+		m_gameOverLabel->show();
+	});
+
+	m_game->gameStarted.connect([this]()
+	{
+		m_gameOverLabel->hide();
+	});
+
+	m_game->gameStopped.connect([this]()
+	{
+		m_gameOverLabel->hide();
+	});
+
 	m_panel = std::make_shared<tgui::Panel>();
 	m_panel->setPosition(sf::Vector2f(0, 0));
 	m_panel->setSize(sf::Vector2f(640.0f, 640.0f));
 	m_panel->hide();
+	m_panel->disable();
 	m_gui->add(m_panel);
 
 	if(!createBackgroundPanel(resourceCache))
@@ -44,7 +62,7 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 
 	if(!createGameplayStats())
 		return false;
-	
+
 	if(!createGameOverLabel())
 		return false;
 
@@ -57,7 +75,7 @@ bool MenuHomeScreen::createBackgroundPanel(ResourceCache &resourceCache)
 	if(atlas != nullptr)
 	{
 		tgui::Picture::Ptr bg = std::make_shared<tgui::Picture>();
-		bg->setTexture({ *atlas, sf::IntRect(4, 4, 100, 100), sf::IntRect(20, 20, 60, 60) });
+		bg->setTexture({ *atlas, sf::IntRect(4, 126, 100, 100), sf::IntRect(20, 20, 60, 60) });
 		bg->setPosition(sf::Vector2f(384.0f, 0.0f));
 		bg->setSize(sf::Vector2f(256.0f, 640.0f));
 		m_panel->add(bg);
@@ -99,13 +117,13 @@ bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
-		auto newGameButton = createButton(atlas, "NEW GAME", { 414.0f, 100.0f });
+		auto newGameButton = createButton(atlas, "NEW GAME", { 414.0f, 90.0f });
 		newGameButton->connect("pressed", [this]()
 		{
 			m_game->startNewGame();
 		});
 
-		m_pauseButton = createButton(atlas, "PAUSE", { 414.0f, 155.0f });
+		m_pauseButton = createButton(atlas, "PAUSE", { 414.0f, 145.0f });
 		m_pauseButton->connect("pressed", [this]()
 		{
 			if(m_game->isGameRunning() && !m_game->isGameOver())
@@ -123,8 +141,26 @@ bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 			}
 		});
 
-		createButton(atlas, "HIGHSCORES", { 414.0f, 210.0f });
-		createButton(atlas, "ABOUT", { 414.0f, 265.0f });
+		auto highscoreButton = createButton(atlas, "HIGHSCORES", { 414.0f, 200.0f });
+		highscoreButton->connect("pressed", [this]()
+		{
+			if(auto sm = m_stateMachine.lock())
+				sm->pushState(MenuStateID::HIGHSCORE_SCREEN);
+		});
+
+		auto aboutButton = createButton(atlas, "ABOUT", { 414.0f, 255.0f });
+		aboutButton->connect("pressed", [this]()
+		{
+			if(auto sm = m_stateMachine.lock())
+				sm->pushState(MenuStateID::ABOUT_SCREEN);
+		});
+
+		auto exitButton = createButton(atlas, "QUIT", { 414.0f, 310.0f });
+		exitButton->connect("pressed", [this]()
+		{
+			m_game->quit();
+		});
+
 		return true;
 	}
 
@@ -142,9 +178,9 @@ tgui::Button::Ptr MenuHomeScreen::createButton(std::shared_ptr<sf::Texture> atla
 	button->getRenderer()->setTextColor({ 88, 88, 88, 255 });
 	button->getRenderer()->setTextColorHover({ 88, 88, 88, 255 });
 	button->getRenderer()->setTextColorDown({ 88, 88, 88, 255 });
-	button->getRenderer()->setTexture({ *atlas, sf::IntRect(4, 157, 190, 45) });
-	button->getRenderer()->setTextureHover({ *atlas, sf::IntRect(4, 157, 190, 45) });
-	button->getRenderer()->setTextureDown({ *atlas, sf::IntRect(4, 106, 190, 49) });
+	button->getRenderer()->setTexture({ *atlas, sf::IntRect(126, 4, 190, 45) });
+	button->getRenderer()->setTextureHover({ *atlas, sf::IntRect(126, 4, 190, 45) });
+	button->getRenderer()->setTextureDown({ *atlas, sf::IntRect(318, 4, 190, 49) });
 	
 	m_panel->add(button);
 	return button;
@@ -158,7 +194,7 @@ bool MenuHomeScreen::createGameplayStats()
 	title->setSize(sf::Vector2f(220, 30.0f));
 	title->setPosition(sf::Vector2f(414.0f, 484.0f));
 	title->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Left);
-	title->getRenderer()->setTextColor({ 255, 102, 0, 255 });
+	title->getRenderer()->setTextColor({ 88, 88, 88, 255 });
 
 	m_levelStat = createStatLable("LEVEL  :", { 424.0f, 520 });
 	m_levelStat->setText(std::to_string(m_game->getLevel()));
@@ -196,7 +232,7 @@ tgui::Label::Ptr MenuHomeScreen::createStatLable(std::string text, sf::Vector2f 
 	label->setSize(sf::Vector2f(80.0f, 20.0f));
 	label->setPosition(position);
 	label->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Left);
-	label->getRenderer()->setTextColor({ 255, 102, 0, 255 });
+	label->getRenderer()->setTextColor({ 88, 88, 88, 255 });
 
 	tgui::Label::Ptr content = std::make_shared<tgui::Label>();
 	content->setText("999999");
@@ -204,7 +240,7 @@ tgui::Label::Ptr MenuHomeScreen::createStatLable(std::string text, sf::Vector2f 
 	content->setSize(sf::Vector2f(125.0f, 20.0f));
 	content->setPosition({ position.x + 85.0f, position.y });
 	content->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Left);
-	content->getRenderer()->setTextColor({ 255, 102, 0, 255 });
+	content->getRenderer()->setTextColor({ 88, 88, 88, 255 });
 
 	m_panel->add(label);
 	m_panel->add(content);
@@ -232,16 +268,6 @@ void MenuHomeScreen::onUpdate(float deltaTime)
 	auto eventManager = app->getEventManager();
 
 	m_timeStat->setText(std::to_string((int)m_game->getGameTime()));
-	if(m_game->isGameRunning() && m_game->isGameOver())
-	{
-		if(!m_gameOverLabel->isVisible())
-			m_gameOverLabel->show();
-	}
-	else 
-	{
-		if(m_gameOverLabel->isVisible())
-			m_gameOverLabel->hide();
-	}
 }
 
 void MenuHomeScreen::onFocusEnter()
@@ -253,7 +279,7 @@ void MenuHomeScreen::onFocusEnter()
 void MenuHomeScreen::onFocusExit()
 {
 	MenuState::onFocusExit();
-	m_panel->disable();
+	m_panel->disable(false);
 }
 
 void MenuHomeScreen::onShow()
@@ -283,7 +309,7 @@ void MenuHomeScreen::renderTetrominoPreview()
 			auto tile = m_tileset->getTile(m_queuedTetromino.getColor());
 			auto tileSize = m_tileset->getTileSize();
 			auto tetrominoPos = sf::Vector2f(512.0f - (m_queuedTetromino.getWidth() * tileSize.x) / 2.0f, 
-											 340.0f + ((m_queuedTetromino.getHeight() - (m_queuedTetromino.getPaddingTop() + m_queuedTetromino.getPaddingBottom())) * tileSize.y) / 2.0f);
+											 360.0f + ((m_queuedTetromino.getHeight() - (m_queuedTetromino.getPaddingTop() + m_queuedTetromino.getPaddingBottom())) * tileSize.y) / 2.0f);
 
 			if(tile != nullptr)
 			{
@@ -305,7 +331,7 @@ void MenuHomeScreen::renderTetrominoPreview()
 
 std::string MenuHomeScreen::getID() const
 {
-	return "MenuHomeScreen";
+	return MenuStateID::HOME_SCREEN;
 }
 
 MenuStackFlags MenuHomeScreen::getStackFlags() const

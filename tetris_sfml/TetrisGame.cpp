@@ -5,6 +5,7 @@
 using namespace tetris;
 
 TetrisGame::TetrisGame() :
+	m_highscores(std::make_shared<HighscoreManager>(10)),
 	m_board(),
 	m_isGameRunning(false),
 	m_isGameOver(false),
@@ -23,8 +24,9 @@ bool TetrisGame::startup()
 	if(bgTex == nullptr)
 		return false;
 
+	m_highscores->load();
 	m_background.setTexture(*bgTex);
-	
+
 	if(!m_board.create(12, 20, m_resourceCache))
 		return false;
 
@@ -55,9 +57,6 @@ void TetrisGame::update(float deltaTime)
 {
 	auto app = Application::getInstance();
 	auto inputManager = app->getInputManager();
-
-	if(inputManager->getKeyDown(sf::Keyboard::Escape))
-		app->quit();
 
 	if(m_isGameRunning && !m_isGameOver && !m_isGamePaused)
 	{
@@ -90,7 +89,7 @@ void TetrisGame::update(float deltaTime)
 			}
 			else
 			{
-				m_isGameOver = true;
+				onGameOver();
 			}
 		}
 	}
@@ -113,6 +112,17 @@ void TetrisGame::shutdown()
 {
 }
 
+void TetrisGame::onGameOver()
+{
+	m_isGameOver = true;
+	gameOver.send();
+
+	if(m_highscores->isHighscore(m_board.getScore()))
+	{
+		m_menu.showNewHighscoreScreen();
+	}
+}
+
 void TetrisGame::startNewGame()
 {
 	m_board.reset();
@@ -122,14 +132,20 @@ void TetrisGame::startNewGame()
 	m_isGameRunning = m_board.addTetromino(chooseRandomTetromino());
 	m_queuedTromino = chooseRandomTetromino();
 	tetrominoQueueChanged.send();
+
+	if(m_isGameRunning)
+		gameStarted.send();
 }
 
 void TetrisGame::stopCurrentGame()
 {
+	m_board.reset();
 	m_gameTime = 0.0f;
 	m_isGameOver = false;
 	m_isGameRunning = false;
 	m_isGamePaused = false;
+
+	gameStopped.send();
 }
 
 void TetrisGame::pauseCurrentGame()
@@ -140,6 +156,19 @@ void TetrisGame::pauseCurrentGame()
 void TetrisGame::unpauseCurrentGame()
 {
 	m_isGamePaused = false;
+}
+
+void TetrisGame::quit()
+{
+	auto app = Application::getInstance();
+
+	m_highscores->save();
+	app->quit();
+}
+
+std::shared_ptr<HighscoreManager> TetrisGame::getHighscores() const
+{
+	return m_highscores;
 }
 
 TetrominoType TetrisGame::getQueuedTetromino() const

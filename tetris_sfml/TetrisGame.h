@@ -6,11 +6,13 @@
 #include "TetrisMenu.h"
 #include "ResourceCache.h"
 #include "Signal.h"
+#include "HighscoreManager.h"
 
 namespace tetris
 {
 	class TetrisGame : public ApplicationListener
 	{
+		std::shared_ptr<HighscoreManager> m_highscores;
 		ResourceCache m_resourceCache;
 		TetrisBoard m_board;
 		TetrisMenu m_menu;
@@ -22,6 +24,7 @@ namespace tetris
 		bool m_isGamePaused;
 
 		TetrominoType chooseRandomTetromino();
+		void onGameOver();
 	public:
 		TetrisGame();
 
@@ -35,7 +38,9 @@ namespace tetris
 		void stopCurrentGame();
 		void pauseCurrentGame();
 		void unpauseCurrentGame();
+		void quit();
 
+		std::shared_ptr<HighscoreManager> getHighscores() const;
 		TetrominoType getQueuedTetromino() const;
 		float getGameTime() const;
 		int getScore() const;
@@ -45,6 +50,9 @@ namespace tetris
 		bool isGameOver() const;
 		bool isGamePaused() const;
 
+		Signal gameStarted;
+		Signal gameStopped;
+		Signal gameOver;
 		Signal tetrominoQueueChanged;
 		Signal scoreChanged;
 		Signal levelChanged;

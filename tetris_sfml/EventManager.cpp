@@ -11,9 +11,6 @@ void EventManager::update(sf::RenderWindow &window)
 	m_events.clear();
 	while(window.pollEvent(evt))
 	{
-		if(evt.type == sf::Event::Closed)
-			app->quit();
-
 		m_events.push_back(evt);
 	}
 }

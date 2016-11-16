@@ -25,5 +25,6 @@ namespace tetris
 		bool create(TetrisGame *game, ResourceCache &resourceCache);
 		void update(float deltaTime);
 		void render();
+		void showNewHighscoreScreen();
 	};
 }

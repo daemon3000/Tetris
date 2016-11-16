@@ -61,6 +61,7 @@ void MenuStateMachine::changeState(const std::string &stateID)
 	if(state != nullptr)
 	{
 		state->onEnter();
+		state->onFocusEnter();
 		m_stateStack.push_back(state);
 	}
 	else
@@ -78,7 +79,7 @@ void MenuStateMachine::pushState(const std::string &stateID)
 		switch(state->getStackFlags())
 		{
 		case MenuStackFlags::DrawOnly:
-			for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+			for(int i = m_stateStack.size() - 1; i >= 0; i--)
 			{
 				m_stateStack[i]->onFocusExit();
 				if(m_stateStack[i]->getStackFlags() != MenuStackFlags::DrawAndUpdate)
@@ -86,13 +87,13 @@ void MenuStateMachine::pushState(const std::string &stateID)
 			}
 			break;
 		case MenuStackFlags::HideAndDontUpdate:
-			for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+			for(int i = m_stateStack.size() - 1; i >= 0; i--)
 			{
 				m_stateStack[i]->onFocusExit();
 				if(m_stateStack[i]->getStackFlags() != MenuStackFlags::DrawAndUpdate)
 					break;
 			}
-			for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+			for(int i = m_stateStack.size() - 1; i >= 0; i--)
 			{
 				m_stateStack[i]->onHide();
 				if(m_stateStack[i]->getStackFlags() == MenuStackFlags::HideAndDontUpdate)
@@ -104,6 +105,7 @@ void MenuStateMachine::pushState(const std::string &stateID)
 		}
 
 		state->onEnter();
+		state->onFocusEnter();
 		m_stateStack.push_back(state);
 		calculateUpdateOrder();
 		calculateRenderOrder();
@@ -114,18 +116,19 @@ void MenuStateMachine::pushState(const std::string &stateID)
 	}
 }
 
-void MenuStateMachine::popState(const std::string &stateID)
+void MenuStateMachine::popState()
 {
 	if(m_stateStack.size() > 0)
 	{
 		auto state = m_stateStack[m_stateStack.size() - 1];
+		state->onFocusExit();
 		state->onExit();
 		m_stateStack.pop_back();
 
 		switch(state->getStackFlags())
 		{
 		case MenuStackFlags::DrawOnly:
-			for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+			for(int i = m_stateStack.size() - 1; i >= 0; i--)
 			{
 				m_stateStack[i]->onFocusEnter();
 				if(m_stateStack[i]->getStackFlags() != MenuStackFlags::DrawAndUpdate)
@@ -133,13 +136,13 @@ void MenuStateMachine::popState(const std::string &stateID)
 			}
 			break;
 		case MenuStackFlags::HideAndDontUpdate:
-			for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+			for(int i = m_stateStack.size() - 1; i >= 0; i--)
 			{
 				m_stateStack[i]->onFocusEnter();
 				if(m_stateStack[i]->getStackFlags() != MenuStackFlags::DrawAndUpdate)
 					break;
 			}
-			for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+			for(int i = m_stateStack.size() - 1; i >= 0; i--)
 			{
 				m_stateStack[i]->onShow();
 				if(m_stateStack[i]->getStackFlags() == MenuStackFlags::HideAndDontUpdate)
@@ -159,6 +162,7 @@ void MenuStateMachine::clearAll()
 {
 	for(size_t i = 0; i < m_stateStack.size(); i++)
 	{
+		m_stateStack[i]->onFocusExit();
 		m_stateStack[i]->onExit();
 	}
 	m_stateStack.clear();
@@ -169,7 +173,7 @@ void MenuStateMachine::clearAll()
 void MenuStateMachine::calculateUpdateOrder()
 {
 	m_updateOrderStart = 0;
-	for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+	for(int i = m_stateStack.size() - 1; i >= 0; i--)
 	{
 		if(m_stateStack[i]->getStackFlags() != MenuStackFlags::DrawAndUpdate)
 		{
@@ -182,7 +186,7 @@ void MenuStateMachine::calculateUpdateOrder()
 void MenuStateMachine::calculateRenderOrder()
 {
 	m_renderOrderStart = 0;
-	for(size_t i = m_stateStack.size() - 1; i >= 0; i--)
+	for(int i = m_stateStack.size() - 1; i >= 0; i--)
 	{
 		if(m_stateStack[i]->getStackFlags() == MenuStackFlags::HideAndDontUpdate)
 		{

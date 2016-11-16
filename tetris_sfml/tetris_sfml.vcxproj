@@ -154,12 +154,15 @@
     <ClInclude Include="EngineSettings.h" />
     <ClInclude Include="EventManager.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameConstants.h" />
+    <ClInclude Include="HighscoreManager.h" />
     <ClInclude Include="MenuAboutScreen.h" />
-    <ClInclude Include="MenuGameOverScreen.h" />
+    <ClInclude Include="MenuNewHighscoreScreen.h" />
     <ClInclude Include="MenuHighscoreScreen.h" />
     <ClInclude Include="MenuHomeScreen.h" />
     <ClInclude Include="MenuStackFlags.h" />
     <ClInclude Include="MenuState.h" />
+    <ClInclude Include="MenuStateID.h" />
     <ClInclude Include="MenuStateMachine.h" />
     <ClInclude Include="Rotation.h" />
     <ClInclude Include="Signal.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="TetrominoColor.h" />
     <ClInclude Include="TetrominoType.h" />
+    <ClInclude Include="TextAsset.h" />
     <ClInclude Include="Tileset.h" />
   </ItemGroup>
   <ItemGroup>
@@ -182,11 +186,12 @@
     <ClCompile Include="DataAsset.cpp" />
     <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="HighscoreManager.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="MenuAboutScreen.cpp" />
-    <ClCompile Include="MenuGameOverScreen.cpp" />
+    <ClCompile Include="MenuNewHighscoreScreen.cpp" />
     <ClCompile Include="MenuHighscoreScreen.cpp" />
     <ClCompile Include="MenuHomeScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
@@ -197,6 +202,7 @@
     <ClCompile Include="TetrisGame.cpp" />
     <ClCompile Include="TetrisMenu.cpp" />
     <ClCompile Include="Tetromino.cpp" />
+    <ClCompile Include="TextAsset.cpp" />
     <ClCompile Include="Tileset.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

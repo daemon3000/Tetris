@@ -123,14 +123,26 @@
     <ClInclude Include="MenuHighscoreScreen.h">
       <Filter>Header Files\game\ui</Filter>
     </ClInclude>
-    <ClInclude Include="MenuGameOverScreen.h">
-      <Filter>Header Files\game\ui</Filter>
-    </ClInclude>
     <ClInclude Include="TetrisMenu.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
     <ClInclude Include="Signal.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStateID.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="TextAsset.h">
+      <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuNewHighscoreScreen.h">
+      <Filter>Header Files\game\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="HighscoreManager.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConstants.h">
+      <Filter>Source Files\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,9 +191,6 @@
     <ClCompile Include="MenuStateMachine.cpp">
       <Filter>Source Files\game\ui</Filter>
     </ClCompile>
-    <ClCompile Include="MenuGameOverScreen.cpp">
-      <Filter>Source Files\game\ui</Filter>
-    </ClCompile>
     <ClCompile Include="MenuHighscoreScreen.cpp">
       <Filter>Source Files\game\ui</Filter>
     </ClCompile>
@@ -192,6 +201,15 @@
       <Filter>Source Files\game\ui</Filter>
     </ClCompile>
     <ClCompile Include="TetrisMenu.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="TextAsset.cpp">
+      <Filter>Source Files\engine</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuNewHighscoreScreen.cpp">
+      <Filter>Source Files\game\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="HighscoreManager.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>

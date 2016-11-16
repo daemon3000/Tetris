@@ -9,24 +9,24 @@ namespace tetris
 
 	namespace ui
 	{
-		class MenuAboutScreen : public MenuState
+		class MenuNewHighscoreScreen : public MenuState
 		{
 			TetrisGame *m_game;
 			tgui::Panel::Ptr m_panel;
-			bool m_wasPaused;
-			
+			tgui::EditBox::Ptr m_nameBox;
+
 			bool createBackgroundPanel(ResourceCache &resourceCache);
 			bool createTitle();
-			bool createAboutMessage(ResourceCache &resourceCache);
+			bool createMessage();
+			bool createNameBox(ResourceCache &resourceCache);
 			bool createButtons(ResourceCache &resourceCache);
+			void saveNewHighscore();
 		public:
-			MenuAboutScreen(TetrisGame *game, std::weak_ptr<MenuStateMachine> stateMachine);
+			MenuNewHighscoreScreen(TetrisGame *game, std::weak_ptr<MenuStateMachine> stateMachine);
 
 			bool create(ResourceCache &resourceCache) override;
 			void onUpdate(float deltaTime) override {}
 			void onRender() override {}
-			void onEnter() override;
-			void onExit() override;
 			void onFocusEnter() override;
 			void onFocusExit() override;
 			void onShow() override;

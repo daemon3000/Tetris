@@ -16,10 +16,9 @@ MenuHomeScreen::MenuHomeScreen(TetrisGame *game, std::weak_ptr<MenuStateMachine>
 bool MenuHomeScreen::create(ResourceCache &resourceCache)
 {
 	auto app = Application::getInstance();
-	auto font = resourceCache.loadFont("data/fonts/kenvector_future.ttf");
 	m_tileset = resourceCache.loadTileset("data/gfx/tileset.xml");
 
-	if(font == nullptr || m_game == nullptr || m_tileset == nullptr)
+	if(m_game == nullptr || m_tileset == nullptr)
 		return false;
 
 	m_queuedTetromino.setType(m_game->getQueuedTetromino());
@@ -28,8 +27,11 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 		m_queuedTetromino.setType(m_game->getQueuedTetromino());
 	});
 
-	m_gui.setWindow(*app->getWindow());
-	m_gui.setFont(font);
+	m_panel = std::make_shared<tgui::Panel>();
+	m_panel->setPosition(sf::Vector2f(0, 0));
+	m_panel->setSize(sf::Vector2f(640.0f, 640.0f));
+	m_panel->hide();
+	m_gui->add(m_panel);
 
 	if(!createBackgroundPanel(resourceCache))
 		return false;
@@ -58,7 +60,7 @@ bool MenuHomeScreen::createBackgroundPanel(ResourceCache &resourceCache)
 		bg->setTexture({ *atlas, sf::IntRect(4, 4, 100, 100), sf::IntRect(20, 20, 60, 60) });
 		bg->setPosition(sf::Vector2f(384.0f, 0.0f));
 		bg->setSize(sf::Vector2f(256.0f, 640.0f));
-		m_gui.add(bg);
+		m_panel->add(bg);
 		return true;
 	}
 
@@ -87,8 +89,8 @@ bool MenuHomeScreen::createTitle()
 	titleShadow->getRenderer()->setTextStyle(style);
 	titleShadow->getRenderer()->setTextColor({ 50, 50, 50, 255 });
 
-	m_gui.add(titleShadow);
-	m_gui.add(title);
+	m_panel->add(titleShadow);
+	m_panel->add(title);
 	return true;
 }
 
@@ -144,7 +146,7 @@ tgui::Button::Ptr MenuHomeScreen::createButton(std::shared_ptr<sf::Texture> atla
 	button->getRenderer()->setTextureHover({ *atlas, sf::IntRect(4, 157, 190, 45) });
 	button->getRenderer()->setTextureDown({ *atlas, sf::IntRect(4, 106, 190, 49) });
 	
-	m_gui.add(button);
+	m_panel->add(button);
 	return button;
 }
 
@@ -182,7 +184,7 @@ bool MenuHomeScreen::createGameplayStats()
 	m_timeStat = createStatLable("TIME      :", { 424.0f, 595 });
 	m_timeStat->setText(std::to_string((int)m_game->getGameTime()));
 
-	m_gui.add(title);
+	m_panel->add(title);
 	return true;
 }
 
@@ -204,8 +206,8 @@ tgui::Label::Ptr MenuHomeScreen::createStatLable(std::string text, sf::Vector2f 
 	content->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Left);
 	content->getRenderer()->setTextColor({ 255, 102, 0, 255 });
 
-	m_gui.add(label);
-	m_gui.add(content);
+	m_panel->add(label);
+	m_panel->add(content);
 	return content;
 }
 
@@ -220,7 +222,7 @@ bool MenuHomeScreen::createGameOverLabel()
 	m_gameOverLabel->getRenderer()->setTextColor({ 255, 102, 0, 255 });
 	m_gameOverLabel->hide();
 
-	m_gui.add(m_gameOverLabel);
+	m_panel->add(m_gameOverLabel);
 	return true;
 }
 
@@ -228,11 +230,6 @@ void MenuHomeScreen::onUpdate(float deltaTime)
 {
 	auto app = Application::getInstance();
 	auto eventManager = app->getEventManager();
-
-	eventManager->forEachEvent([this](const sf::Event &evt)
-	{
-		m_gui.handleEvent(evt);
-	});
 
 	m_timeStat->setText(std::to_string((int)m_game->getGameTime()));
 	if(m_game->isGameRunning() && m_game->isGameOver())
@@ -247,9 +244,32 @@ void MenuHomeScreen::onUpdate(float deltaTime)
 	}
 }
 
+void MenuHomeScreen::onFocusEnter()
+{
+	MenuState::onFocusEnter();
+	m_panel->enable();
+}
+
+void MenuHomeScreen::onFocusExit()
+{
+	MenuState::onFocusExit();
+	m_panel->disable();
+}
+
+void MenuHomeScreen::onShow()
+{
+	MenuState::onShow();
+	m_panel->show();
+}
+
+void MenuHomeScreen::onHide()
+{
+	MenuState::onHide();
+	m_panel->hide();
+}
+
 void MenuHomeScreen::onRender()
 {
-	m_gui.draw();
 	renderTetrominoPreview();
 }
 

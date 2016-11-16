@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <SFML\Graphics.hpp>
+#include <TGUI\TGUI.hpp>
 
 namespace tetris
 {
@@ -16,6 +17,7 @@ namespace tetris
 	class TetrisMenu : sf::NonCopyable
 	{
 		std::shared_ptr<ui::MenuStateMachine> m_stateMachine;
+		std::shared_ptr<tgui::Gui> m_gui;
 
 	public:
 		TetrisMenu();

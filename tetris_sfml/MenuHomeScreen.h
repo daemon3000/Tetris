@@ -15,7 +15,7 @@ namespace tetris
 		{
 			TetrisGame *m_game;
 			Tetromino m_queuedTetromino;
-			tgui::Gui m_gui;
+			tgui::Panel::Ptr m_panel;
 			tgui::Button::Ptr m_pauseButton;
 			tgui::Label::Ptr m_levelStat;
 			tgui::Label::Ptr m_scoreStat;
@@ -38,6 +38,10 @@ namespace tetris
 			bool create(ResourceCache &resourceCache) override;
 			void onUpdate(float deltaTime) override;
 			void onRender() override;
+			void onFocusEnter() override;
+			void onFocusExit() override;
+			void onShow() override;
+			void onHide() override;
 			std::string getID() const override;
 			MenuStackFlags getStackFlags() const override;
 		};

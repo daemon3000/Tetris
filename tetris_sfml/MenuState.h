@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <SFML\Graphics.hpp>
+#include <TGUI\TGUI.hpp>
 #include "MenuStackFlags.h"
 
 namespace tetris
@@ -16,6 +17,7 @@ namespace tetris
 		{
 		protected:
 			std::weak_ptr<MenuStateMachine> m_stateMachine;
+			std::shared_ptr<tgui::Gui> m_gui;
 			bool m_isHidden;
 			bool m_hasFocus;
 

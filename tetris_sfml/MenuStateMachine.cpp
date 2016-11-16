@@ -1,10 +1,22 @@
 #include "MenuStateMachine.h"
 #include "MenuState.h"
+#include "Application.h"
 #include "easylogging++.h"
 
 using namespace tetris::ui;
 
 MenuStateMachine::MenuStateMachine() :
+	m_gui(std::make_shared<tgui::Gui>()),
+	m_updateOrderStart(0),
+	m_renderOrderStart(0)
+{
+	auto app = Application::getInstance();
+	m_gui->setWindow(*app->getWindow());
+	m_gui->setView(sf::View({ 0.0f, 0.0f, 640.0f, 640.0f }));
+}
+
+MenuStateMachine::MenuStateMachine(std::shared_ptr<tgui::Gui> gui) :
+	m_gui(gui),
 	m_updateOrderStart(0),
 	m_renderOrderStart(0)
 {
@@ -15,17 +27,26 @@ void MenuStateMachine::registerState(std::shared_ptr<MenuState> state)
 	m_states.push_back(state);
 }
 
-
 void MenuStateMachine::update(float deltaTime)
 {
+	auto app = Application::getInstance();
+	auto eventManager = app->getEventManager();
+
 	for(size_t i = m_updateOrderStart; i < m_stateStack.size(); i++)
 	{
 		m_stateStack[i]->onUpdate(deltaTime);
 	}
+
+	eventManager->forEachEvent([this](const sf::Event &evt)
+	{
+		m_gui->handleEvent(evt);
+	});
 }
 
 void MenuStateMachine::render()
 {
+	m_gui->draw();
+
 	for(size_t i = m_renderOrderStart; i < m_stateStack.size(); i++)
 	{
 		m_stateStack[i]->onRender();
@@ -183,4 +204,9 @@ std::shared_ptr<MenuState> MenuStateMachine::findState(const std::string &stateI
 	}
 
 	return nullptr;
+}
+
+std::shared_ptr<tgui::Gui> MenuStateMachine::getGUI() const
+{
+	return m_gui;
 }

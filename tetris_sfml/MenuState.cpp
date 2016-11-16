@@ -6,6 +6,11 @@ using namespace tetris::ui;
 MenuState::MenuState(std::weak_ptr<MenuStateMachine> stateMachine) : 
 	m_stateMachine(stateMachine)
 {
+	auto sm = stateMachine.lock();
+	if(sm)
+	{
+		m_gui = sm->getGUI();
+	}
 }
 
 void MenuState::onEnter()

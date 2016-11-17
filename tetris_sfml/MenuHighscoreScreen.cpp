@@ -84,9 +84,6 @@ bool MenuHighscoreScreen::createTitle()
 
 bool MenuHighscoreScreen::createHighscores()
 {
-	auto hsm = m_game->getHighscores();
-	std::string text;
-
 	m_numberLabel = std::make_shared<tgui::Label>();
 	m_numberLabel->setTextSize(18);
 	m_numberLabel->setPosition(sf::Vector2f(20.0f, 85.0f));
@@ -107,42 +104,6 @@ bool MenuHighscoreScreen::createHighscores()
 	m_scoreLabel->setSize(sf::Vector2f(134.0f, 570.0f));
 	m_scoreLabel->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Right);
 	m_scoreLabel->getRenderer()->setTextColor({ 88, 88, 88, 255 });
-
-	for(int i = 0; i < hsm->maxCount(); i++)
-	{
-		text += std::to_string(i + 1) + ".\n\n";
-	}
-	m_numberLabel->setText(text);
-
-	text = "";
-	for(int i = 0; i < hsm->maxCount(); i++)
-	{
-		if(i < hsm->count())
-		{
-			auto hs = hsm->getAt(i);
-			text += hs.name + "\n\n";
-		}
-		else
-		{
-			text += "		-\n\n";
-		}
-	}
-	m_nameLabel->setText(text);
-	
-	text = "";
-	for(int i = 0; i < hsm->maxCount(); i++)
-	{
-		if(i < hsm->count())
-		{
-			auto hs = hsm->getAt(i);
-			text += std::to_string(hs.score) + "\n\n";
-		}
-		else
-		{
-			text += "0\n\n";
-		}
-	}
-	m_scoreLabel->setText(text);
 
 	m_panel->add(m_numberLabel);
 	m_panel->add(m_nameLabel);
@@ -187,6 +148,45 @@ void MenuHighscoreScreen::onEnter()
 	{
 		m_wasPaused = true;
 	}
+
+	auto hsm = m_game->getHighscores();
+	std::string text;
+
+	for(int i = 0; i < hsm->maxCount(); i++)
+	{
+		text += std::to_string(i + 1) + ".\n\n";
+	}
+	m_numberLabel->setText(text);
+
+	text = "";
+	for(int i = 0; i < hsm->maxCount(); i++)
+	{
+		if(i < hsm->count())
+		{
+			auto hs = hsm->getAt(i);
+			text += hs.name + "\n\n";
+		}
+		else
+		{
+			text += "		-\n\n";
+		}
+	}
+	m_nameLabel->setText(text);
+
+	text = "";
+	for(int i = 0; i < hsm->maxCount(); i++)
+	{
+		if(i < hsm->count())
+		{
+			auto hs = hsm->getAt(i);
+			text += std::to_string(hs.score) + "\n\n";
+		}
+		else
+		{
+			text += "0\n\n";
+		}
+	}
+	m_scoreLabel->setText(text);
 }
 
 void MenuHighscoreScreen::onExit()

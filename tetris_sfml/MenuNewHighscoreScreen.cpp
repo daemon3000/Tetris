@@ -106,7 +106,7 @@ bool MenuNewHighscoreScreen::createNameBox(ResourceCache &resourceCache)
 		m_nameBox = std::make_shared<tgui::EditBox>();
 		m_nameBox->setMaximumCharacters(10);
 		m_nameBox->setTextSize(16);
-		m_nameBox->setInputValidator("[a-z0-9_]*");
+		m_nameBox->setInputValidator("[a-zA-Z0-9_]*");
 		m_nameBox->getRenderer()->setPadding({ 10, 10, 10, 10 });
 		m_nameBox->getRenderer()->setBorders({ 0, 0, 0, 0 });
 		m_nameBox->getRenderer()->setTexture({ *atlas, { 126, 55, 190, 45 }, { 15, 15, 160, 15 } });

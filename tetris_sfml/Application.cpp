@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ApplicationListener.h"
-#include "EngineSettings.h"
+#include "EngineConstants.h"
 #include "Math.h"
 
 using namespace tetris;
@@ -54,20 +54,20 @@ void Application::run(ApplicationListener &appListener, const ApplicationSetting
 
 		updates = 0;
 		updateTime = updateClock.getElapsedTime().asMilliseconds();
-		while ((updateTime - nextUpdate) >= kPhysicsUpdateRate && updates < maxUpdates)
+		while ((updateTime - nextUpdate) >= PHYSICS_UPDATE_RATE && updates < maxUpdates)
 		{
 			appListener.fixedUpdate();
-			nextUpdate += kPhysicsUpdateRate;
+			nextUpdate += PHYSICS_UPDATE_RATE;
 		}
 
 		m_deltaTime = frameClock.restart().asSeconds();
-		if (m_deltaTime > kMaxDeltaTime)
-			m_deltaTime = kMaxDeltaTime;
+		if (m_deltaTime > MAX_DELTA_TIME)
+			m_deltaTime = MAX_DELTA_TIME;
 
 		m_fpsUpdateElapsedTime += m_deltaTime;
-		if (m_fpsUpdateElapsedTime >= kFPSUpdateInterval)
+		if (m_fpsUpdateElapsedTime >= FPS_UPDATE_INTERVAL)
 		{
-			m_fps = (int)(m_frames / kFPSUpdateInterval);
+			m_fps = (int)(m_frames / FPS_UPDATE_INTERVAL);
 			m_fpsUpdateElapsedTime = 0.0f;
 			m_frames = 0;
 		}
@@ -91,8 +91,8 @@ void Application::init(const ApplicationSettings &appSettings)
 	sf::Uint32 style = appSettings.fullscreen ? sf::Style::Fullscreen : sf::Style::Close;
 	
 	m_windowTitle = appSettings.title;
-	m_windowSize.x = math::max(appSettings.windowSize.x, kMinWindowWidth);
-	m_windowSize.y = math::max(appSettings.windowSize.y, kMinWindowHeight);
+	m_windowSize.x = math::max(appSettings.windowSize.x, MIN_WINDOW_WIDTH);
+	m_windowSize.y = math::max(appSettings.windowSize.y, MIN_WINDOW_HEIGHT);
 	m_clearColor = appSettings.backgroundColor;
 	m_windowBPP = appSettings.bitsPerPixel;
 	m_window->create(sf::VideoMode(m_windowSize.x, m_windowSize.y, m_windowBPP), m_windowTitle, style);
@@ -100,7 +100,7 @@ void Application::init(const ApplicationSettings &appSettings)
 
 void Application::changeResolution(int width, int height, bool fullscreen)
 {
-	if (width < kMinWindowWidth || height < kMinWindowHeight)
+	if (width < MIN_WINDOW_WIDTH || height < MIN_WINDOW_HEIGHT)
 		return;
 
 	sf::Uint32 style = fullscreen ? sf::Style::Fullscreen : sf::Style::Close;

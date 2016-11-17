@@ -39,11 +39,6 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 		m_gameOverLabel->hide();
 	});
 
-	m_game->gameStopped.connect([this]()
-	{
-		m_gameOverLabel->hide();
-	});
-
 	m_panel = std::make_shared<tgui::Panel>();
 	m_panel->setPosition(sf::Vector2f(0, 0));
 	m_panel->setSize(sf::Vector2f(640.0f, 640.0f));

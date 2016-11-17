@@ -24,8 +24,8 @@ void HighscoreManager::load()
 			std::string name = child.attribute("name").as_string();
 			int score = child.attribute("score").as_int();
 
-			if(score > GameConstants::MAX_SCORE)
-				score = GameConstants::MAX_SCORE;
+			if(score > MAX_SCORE)
+				score = MAX_SCORE;
 
 			m_highscores.push_back({ name, score });
 		}

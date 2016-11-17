@@ -60,9 +60,6 @@
     <ClInclude Include="DataAsset.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
-    <ClInclude Include="EngineSettings.h">
-      <Filter>Header Files\engine</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Header Files\engine</Filter>
     </ClInclude>
@@ -143,6 +140,9 @@
     </ClInclude>
     <ClInclude Include="GameConstants.h">
       <Filter>Source Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineConstants.h">
+      <Filter>Header Files\engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -139,8 +139,6 @@ void TetrisGame::startNewGame()
 
 void TetrisGame::stopCurrentGame()
 {
-	m_board.reset();
-	m_gameTime = 0.0f;
 	m_isGameOver = false;
 	m_isGameRunning = false;
 	m_isGamePaused = false;

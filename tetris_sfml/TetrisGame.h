@@ -13,6 +13,7 @@ namespace tetris
 	class TetrisGame : public ApplicationListener
 	{
 		std::shared_ptr<HighscoreManager> m_highscores;
+		std::shared_ptr<sf::Music> m_backgroundMusic;
 		ResourceCache m_resourceCache;
 		TetrisBoard m_board;
 		TetrisMenu m_menu;

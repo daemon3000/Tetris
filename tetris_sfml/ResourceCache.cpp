@@ -55,6 +55,22 @@ std::shared_ptr<sf::SoundBuffer> ResourceCache::loadSound(const std::string & pa
 	return nullptr;
 }
 
+std::shared_ptr<sf::Music> ResourceCache::loadMusic(const std::string & path)
+{
+	auto loadedMusic = m_music.find(path);
+	if(loadedMusic != m_music.end())
+		return loadedMusic->second;
+
+	std::shared_ptr<sf::Music> music = std::make_shared<sf::Music>();
+	if(music->openFromFile(path))
+	{
+		m_music.insert(std::make_pair(path, music));
+		return music;
+	}
+
+	return nullptr;
+}
+
 std::shared_ptr<DataAsset> ResourceCache::loadDataAsset(const std::string& path)
 {
 	auto loadedDataAsset = m_dataAssets.find(path);

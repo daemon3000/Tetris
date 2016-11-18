@@ -96,6 +96,11 @@ void Application::init(const ApplicationSettings &appSettings)
 	m_clearColor = appSettings.backgroundColor;
 	m_windowBPP = appSettings.bitsPerPixel;
 	m_window->create(sf::VideoMode(m_windowSize.x, m_windowSize.y, m_windowBPP), m_windowTitle, style);
+
+	if(appSettings.iconPixelData != nullptr && appSettings.iconSize.x > 0 && appSettings.iconSize.y > 0)
+	{
+		m_window->setIcon(appSettings.iconSize.x, appSettings.iconSize.y, appSettings.iconPixelData);
+	}
 }
 
 void Application::changeResolution(int width, int height, bool fullscreen)

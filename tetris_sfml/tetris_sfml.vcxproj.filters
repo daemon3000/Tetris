@@ -138,11 +138,17 @@
     <ClInclude Include="HighscoreManager.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
-    <ClInclude Include="GameConstants.h">
-      <Filter>Source Files\game</Filter>
-    </ClInclude>
     <ClInclude Include="EngineConstants.h">
       <Filter>Header Files\engine</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameConstants.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="TetrisIcon.h">
+      <Filter>Header Files\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,5 +218,15 @@
     <ClCompile Include="HighscoreManager.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="tetris_sfml.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\tetris.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

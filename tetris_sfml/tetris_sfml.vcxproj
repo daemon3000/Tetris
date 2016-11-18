@@ -164,6 +164,7 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MenuStateID.h" />
     <ClInclude Include="MenuStateMachine.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Rotation.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="TetrisBoard.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="ResourceCache.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="TetrisGame.h" />
+    <ClInclude Include="TetrisIcon.h" />
     <ClInclude Include="TetrisMenu.h" />
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="TetrominoColor.h" />
@@ -204,6 +206,12 @@
     <ClCompile Include="Tetromino.cpp" />
     <ClCompile Include="TextAsset.cpp" />
     <ClCompile Include="Tileset.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="tetris_sfml.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="data\tetris.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

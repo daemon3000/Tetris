@@ -21,7 +21,9 @@ TetrominoType TetrisGame::chooseRandomTetromino()
 bool TetrisGame::startup()
 {
 	auto bgTex = m_resourceCache.loadTexture("data/gfx/background.png");
-	if(bgTex == nullptr)
+	m_backgroundMusic = m_resourceCache.loadMusic("data/audio/music_03.ogg");
+
+	if(bgTex == nullptr || m_backgroundMusic == nullptr)
 		return false;
 
 	m_highscores->load();
@@ -45,6 +47,9 @@ bool TetrisGame::startup()
 	{
 		numberOfClearedLinesChanged.send();
 	});
+
+	m_backgroundMusic->setLoop(true);
+	m_backgroundMusic->play();
 
 	return true;
 }
@@ -110,6 +115,8 @@ void TetrisGame::render(float deltaTime)
 
 void TetrisGame::shutdown()
 {
+	if(m_backgroundMusic != nullptr)
+		m_backgroundMusic->stop();
 }
 
 void TetrisGame::onGameOver()

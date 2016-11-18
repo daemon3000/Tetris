@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML\Audio.hpp>
 #include <TGUI\TGUI.hpp>
 #include "MenuState.h"
 
@@ -12,6 +13,7 @@ namespace tetris
 		class MenuNewHighscoreScreen : public MenuState
 		{
 			TetrisGame *m_game;
+			sf::Sound m_clickSound;
 			tgui::Panel::Ptr m_panel;
 			tgui::EditBox::Ptr m_nameBox;
 

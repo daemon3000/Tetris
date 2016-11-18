@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML\Audio.hpp>
 #include <TGUI\TGUI.hpp>
 #include "MenuState.h"
 #include "Tetromino.h"
@@ -15,6 +16,7 @@ namespace tetris
 		{
 			TetrisGame *m_game;
 			Tetromino m_queuedTetromino;
+			sf::Sound m_clickSound;
 			tgui::Panel::Ptr m_panel;
 			tgui::Button::Ptr m_pauseButton;
 			tgui::Label::Ptr m_levelStat;

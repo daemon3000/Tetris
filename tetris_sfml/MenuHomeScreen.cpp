@@ -18,9 +18,10 @@ MenuHomeScreen::MenuHomeScreen(TetrisGame *game, std::weak_ptr<MenuStateMachine>
 bool MenuHomeScreen::create(ResourceCache &resourceCache)
 {
 	auto app = Application::getInstance();
+	auto clickSound = resourceCache.loadSound("data/audio/click.ogg");
 	m_tileset = resourceCache.loadTileset("data/gfx/tileset.xml");
-
-	if(m_game == nullptr || m_tileset == nullptr)
+	
+	if(m_game == nullptr || m_tileset == nullptr || clickSound == nullptr)
 		return false;
 
 	m_queuedTetromino.setType(m_game->getQueuedTetromino());
@@ -38,6 +39,8 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 	{
 		m_gameOverLabel->hide();
 	});
+
+	m_clickSound.setBuffer(*clickSound);
 
 	m_panel = std::make_shared<tgui::Panel>();
 	m_panel->setPosition(sf::Vector2f(0, 0));
@@ -115,12 +118,14 @@ bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 		auto newGameButton = createButton(atlas, "NEW GAME", { 414.0f, 90.0f });
 		newGameButton->connect("pressed", [this]()
 		{
+			m_clickSound.play();
 			m_game->startNewGame();
 		});
 
 		m_pauseButton = createButton(atlas, "PAUSE", { 414.0f, 145.0f });
 		m_pauseButton->connect("pressed", [this]()
 		{
+			m_clickSound.play();
 			if(m_game->isGameRunning() && !m_game->isGameOver())
 			{
 				if(m_game->isGamePaused())
@@ -139,6 +144,7 @@ bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 		auto highscoreButton = createButton(atlas, "HIGHSCORES", { 414.0f, 200.0f });
 		highscoreButton->connect("pressed", [this]()
 		{
+			m_clickSound.play();
 			if(auto sm = m_stateMachine.lock())
 				sm->pushState(MenuStateID::HIGHSCORE_SCREEN);
 		});
@@ -146,6 +152,7 @@ bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 		auto aboutButton = createButton(atlas, "ABOUT", { 414.0f, 255.0f });
 		aboutButton->connect("pressed", [this]()
 		{
+			m_clickSound.play();
 			if(auto sm = m_stateMachine.lock())
 				sm->pushState(MenuStateID::ABOUT_SCREEN);
 		});
@@ -153,6 +160,7 @@ bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 		auto exitButton = createButton(atlas, "QUIT", { 414.0f, 310.0f });
 		exitButton->connect("pressed", [this]()
 		{
+			m_clickSound.play();
 			m_game->quit();
 		});
 

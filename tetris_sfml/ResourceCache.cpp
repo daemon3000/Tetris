@@ -39,6 +39,22 @@ std::shared_ptr<sf::Font> ResourceCache::loadFont(const std::string& path)
 	return nullptr;
 }
 
+std::shared_ptr<sf::SoundBuffer> ResourceCache::loadSound(const std::string & path)
+{
+	auto loadedSound = m_sounds.find(path);
+	if(loadedSound != m_sounds.end())
+		return loadedSound->second;
+
+	std::shared_ptr<sf::SoundBuffer> sound = std::make_shared<sf::SoundBuffer>();
+	if(sound->loadFromFile(path))
+	{
+		m_sounds.insert(std::make_pair(path, sound));
+		return sound;
+	}
+
+	return nullptr;
+}
+
 std::shared_ptr<DataAsset> ResourceCache::loadDataAsset(const std::string& path)
 {
 	auto loadedDataAsset = m_dataAssets.find(path);

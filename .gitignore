@@ -3,6 +3,7 @@
 *.dll
 *.sdf
 *.log
+*.ads
 
 #Junk Folders
 x64*

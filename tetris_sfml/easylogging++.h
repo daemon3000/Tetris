@@ -822,7 +822,7 @@ namespace el {
                         static const char* kDefaultLogFile                         =      "logs/myeasylog.log";
 #      endif  // ELPP_OS_ANDROID
 #   elif ELPP_OS_WINDOWS
-                        static const char* kDefaultLogFile                         =      "logs\\myeasylog.log";
+                        static const char* kDefaultLogFile                         =      "tetris.log";
 #   endif  // ELPP_OS_UNIX
 #endif  // defined(ELPP_DEFAULT_LOG_FILE)
 #if !defined(ELPP_DISABLE_LOG_FILE_FROM_ARG)

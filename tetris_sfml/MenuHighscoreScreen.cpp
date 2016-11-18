@@ -17,7 +17,7 @@ MenuHighscoreScreen::MenuHighscoreScreen(TetrisGame *game, std::weak_ptr<MenuSta
 
 bool MenuHighscoreScreen::create(ResourceCache &resourceCache)
 {
-	auto clickSound = resourceCache.loadSound("data/audio/click.ogg");
+	auto clickSound = resourceCache.loadSound("assets/audio/click.ogg");
 	if(clickSound == nullptr)
 		return false;
 
@@ -47,7 +47,7 @@ bool MenuHighscoreScreen::create(ResourceCache &resourceCache)
 
 bool MenuHighscoreScreen::createBackgroundPanel(ResourceCache &resourceCache)
 {
-	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
+	auto atlas = resourceCache.loadTexture("assets/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
 		tgui::Picture::Ptr bg = std::make_shared<tgui::Picture>();
@@ -119,7 +119,7 @@ bool MenuHighscoreScreen::createHighscores()
 
 bool MenuHighscoreScreen::createButtons(ResourceCache &resourceCache)
 {
-	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
+	auto atlas = resourceCache.loadTexture("assets/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
 		tgui::Button::Ptr button = std::make_shared<tgui::Button>();

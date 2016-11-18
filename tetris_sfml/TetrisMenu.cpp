@@ -21,7 +21,7 @@ TetrisMenu::TetrisMenu()
 bool TetrisMenu::create(TetrisGame *game, ResourceCache &resourceCache)
 {
 	auto app = Application::getInstance();
-	auto font = resourceCache.loadFont("data/fonts/kenvector_future.ttf");
+	auto font = resourceCache.loadFont("assets/fonts/kenvector_future.ttf");
 	auto aboutScreen = std::make_shared<MenuAboutScreen>(game, m_stateMachine);
 	auto highscoreScreen = std::make_shared<MenuHighscoreScreen>(game, m_stateMachine);
 	auto newHighscoreScreen = std::make_shared<MenuNewHighscoreScreen>(game, m_stateMachine);

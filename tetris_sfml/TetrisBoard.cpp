@@ -27,7 +27,7 @@ TetrisBoard::TetrisBoard()
 
 bool TetrisBoard::create(int width, int height, ResourceCache &resourceCache)
 {
-	m_tileset = resourceCache.loadTileset("data/gfx/tileset.xml");
+	m_tileset = resourceCache.loadTileset("assets/gfx/tileset.xml");
 	if(m_tileset == nullptr || width <= 0 || height <= 0)
 		return false;
 

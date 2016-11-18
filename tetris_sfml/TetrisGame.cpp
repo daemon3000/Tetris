@@ -20,8 +20,8 @@ TetrominoType TetrisGame::chooseRandomTetromino()
 
 bool TetrisGame::startup()
 {
-	auto bgTex = m_resourceCache.loadTexture("data/gfx/background.png");
-	m_backgroundMusic = m_resourceCache.loadMusic("data/audio/music_03.ogg");
+	auto bgTex = m_resourceCache.loadTexture("assets/gfx/background.png");
+	m_backgroundMusic = m_resourceCache.loadMusic("assets/audio/music_03.ogg");
 
 	if(bgTex == nullptr || m_backgroundMusic == nullptr)
 		return false;

@@ -18,8 +18,8 @@ MenuHomeScreen::MenuHomeScreen(TetrisGame *game, std::weak_ptr<MenuStateMachine>
 bool MenuHomeScreen::create(ResourceCache &resourceCache)
 {
 	auto app = Application::getInstance();
-	auto clickSound = resourceCache.loadSound("data/audio/click.ogg");
-	m_tileset = resourceCache.loadTileset("data/gfx/tileset.xml");
+	auto clickSound = resourceCache.loadSound("assets/audio/click.ogg");
+	m_tileset = resourceCache.loadTileset("assets/gfx/tileset.xml");
 	
 	if(m_game == nullptr || m_tileset == nullptr || clickSound == nullptr)
 		return false;
@@ -69,7 +69,7 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 
 bool MenuHomeScreen::createBackgroundPanel(ResourceCache &resourceCache)
 {
-	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
+	auto atlas = resourceCache.loadTexture("assets/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
 		tgui::Picture::Ptr bg = std::make_shared<tgui::Picture>();
@@ -112,7 +112,7 @@ bool MenuHomeScreen::createTitle()
 
 bool MenuHomeScreen::createButtons(ResourceCache &resourceCache)
 {
-	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
+	auto atlas = resourceCache.loadTexture("assets/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
 		auto newGameButton = createButton(atlas, "NEW GAME", { 414.0f, 90.0f });

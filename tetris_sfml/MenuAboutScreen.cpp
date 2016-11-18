@@ -16,7 +16,7 @@ MenuAboutScreen::MenuAboutScreen(TetrisGame *game, std::weak_ptr<MenuStateMachin
 
 bool MenuAboutScreen::create(ResourceCache &resourceCache)
 {
-	auto clickSound = resourceCache.loadSound("data/audio/click.ogg");
+	auto clickSound = resourceCache.loadSound("assets/audio/click.ogg");
 	if(clickSound == nullptr)
 		return false;
 
@@ -46,7 +46,7 @@ bool MenuAboutScreen::create(ResourceCache &resourceCache)
 
 bool MenuAboutScreen::createBackgroundPanel(ResourceCache &resourceCache)
 {
-	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
+	auto atlas = resourceCache.loadTexture("assets/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
 		tgui::Picture::Ptr bg = std::make_shared<tgui::Picture>();
@@ -89,7 +89,7 @@ bool MenuAboutScreen::createTitle()
 
 bool MenuAboutScreen::createAboutMessage(ResourceCache &resourceCache)
 {
-	auto textAsset = resourceCache.loadTextAsset("data/text/about.txt");
+	auto textAsset = resourceCache.loadTextAsset("assets/text/about.txt");
 	if(textAsset != nullptr)
 	{
 		tgui::Label::Ptr message = std::make_shared<tgui::Label>();
@@ -107,7 +107,7 @@ bool MenuAboutScreen::createAboutMessage(ResourceCache &resourceCache)
 
 bool MenuAboutScreen::createButtons(ResourceCache &resourceCache)
 {
-	auto atlas = resourceCache.loadTexture("data/ui/tetris_ui.png");
+	auto atlas = resourceCache.loadTexture("assets/ui/tetris_ui.png");
 	if(atlas != nullptr)
 	{
 		tgui::Button::Ptr button = std::make_shared<tgui::Button>();

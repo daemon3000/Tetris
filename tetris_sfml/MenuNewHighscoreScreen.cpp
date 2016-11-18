@@ -16,6 +16,12 @@ MenuNewHighscoreScreen::MenuNewHighscoreScreen(TetrisGame *game, std::weak_ptr<M
 
 bool MenuNewHighscoreScreen::create(ResourceCache &resourceCache)
 {
+	auto clickSound = resourceCache.loadSound("data/audio/click.ogg");
+	if(clickSound == nullptr)
+		return false;
+
+	m_clickSound.setBuffer(*clickSound);
+
 	m_panel = std::make_shared<tgui::Panel>();
 	m_panel->setPosition(sf::Vector2f(0, 0));
 	m_panel->setSize(sf::Vector2f(640.0f, 640.0f));
@@ -142,6 +148,7 @@ bool MenuNewHighscoreScreen::createButtons(ResourceCache &resourceCache)
 
 		button->connect("pressed", [this]()
 		{
+			m_clickSound.play();
 			if(m_nameBox->getText().getSize() > 0)
 			{
 				saveNewHighscore();

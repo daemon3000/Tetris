@@ -150,6 +150,12 @@
     <ClInclude Include="TetrisIcon.h">
       <Filter>Header Files\game</Filter>
     </ClInclude>
+    <ClInclude Include="MusicPlaylist.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
+    <ClInclude Include="MusicPlayer.h">
+      <Filter>Header Files\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pugixml.cpp">
@@ -216,6 +222,12 @@
       <Filter>Source Files\game\ui</Filter>
     </ClCompile>
     <ClCompile Include="HighscoreManager.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicPlaylist.cpp">
+      <Filter>Source Files\game</Filter>
+    </ClCompile>
+    <ClCompile Include="MusicPlayer.cpp">
       <Filter>Source Files\game</Filter>
     </ClCompile>
   </ItemGroup>

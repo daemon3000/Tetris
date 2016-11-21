@@ -169,6 +169,8 @@
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="MenuStateID.h" />
     <ClInclude Include="MenuStateMachine.h" />
+    <ClInclude Include="MusicPlayer.h" />
+    <ClInclude Include="MusicPlaylist.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Rotation.h" />
     <ClInclude Include="Signal.h" />
@@ -203,6 +205,8 @@
     <ClCompile Include="MenuHomeScreen.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="MenuStateMachine.cpp" />
+    <ClCompile Include="MusicPlayer.cpp" />
+    <ClCompile Include="MusicPlaylist.cpp" />
     <ClCompile Include="pugixml.cpp" />
     <ClCompile Include="ResourceCache.cpp" />
     <ClCompile Include="TetrisBoard.cpp" />

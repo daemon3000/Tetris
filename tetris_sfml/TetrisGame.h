@@ -7,17 +7,18 @@
 #include "ResourceCache.h"
 #include "Signal.h"
 #include "HighscoreManager.h"
+#include "MusicPlayer.h"
 
 namespace tetris
 {
 	class TetrisGame : public ApplicationListener
 	{
 		std::shared_ptr<HighscoreManager> m_highscores;
-		std::shared_ptr<sf::Music> m_backgroundMusic;
 		ResourceCache m_resourceCache;
 		TetrisBoard m_board;
 		TetrisMenu m_menu;
 		sf::Sprite m_background;
+		MusicPlayer m_musicPlayer;
 		TetrominoType m_queuedTromino;
 		float m_gameTime;
 		bool m_isGameRunning;

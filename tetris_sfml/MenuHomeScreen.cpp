@@ -256,7 +256,7 @@ bool MenuHomeScreen::createGameOverLabel()
 	m_gameOverLabel->setText("GAME OVER!");
 	m_gameOverLabel->setTextSize(24);
 	m_gameOverLabel->setSize(sf::Vector2f(196.0f, 30.0f));
-	m_gameOverLabel->setPosition(sf::Vector2f(414.0f, 390.0f));
+	m_gameOverLabel->setPosition(sf::Vector2f(414.0f, 410.0f));
 	m_gameOverLabel->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Center);
 	m_gameOverLabel->getRenderer()->setTextColor({ 255, 102, 0, 255 });
 	m_gameOverLabel->hide();

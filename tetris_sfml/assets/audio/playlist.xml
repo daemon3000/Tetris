@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<playlist version="1.0">
+    <track path="assets/audio/music_01.ogg" volume="10.0" />
+    <track path="assets/audio/music_02.ogg" volume="50.0" />
+    <track path="assets/audio/music_03.ogg" volume="50.0" />
+</playlist>

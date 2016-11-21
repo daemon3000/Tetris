@@ -10,6 +10,7 @@ namespace tetris
 	class Tileset;
 	class DataAsset;
 	class TextAsset;
+	class MusicPlaylist;
 
 	class ResourceCache : sf::NonCopyable
 	{
@@ -20,6 +21,7 @@ namespace tetris
 		std::unordered_map<std::string, std::shared_ptr<DataAsset>> m_dataAssets;
 		std::unordered_map<std::string, std::shared_ptr<TextAsset>> m_textAssets;
 		std::unordered_map<std::string, std::shared_ptr<Tileset>> m_tilesets;
+		std::unordered_map<std::string, std::shared_ptr<MusicPlaylist>> m_playlists;
 
 	public:
 		std::shared_ptr<sf::Texture> loadTexture(const std::string &path, bool smooth = true);
@@ -29,5 +31,6 @@ namespace tetris
 		std::shared_ptr<DataAsset> loadDataAsset(const std::string &path);
 		std::shared_ptr<TextAsset> loadTextAsset(const std::string &path);
 		std::shared_ptr<Tileset> loadTileset(const std::string &path);
+		std::shared_ptr<MusicPlaylist> loadPlaylist(const std::string &path);
 	};
 }

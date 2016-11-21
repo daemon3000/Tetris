@@ -3,6 +3,7 @@
 #include "DataAsset.h"
 #include "TextAsset.h"
 #include "Tileset.h"
+#include "MusicPlaylist.h"
 
 using namespace tetris;
 
@@ -114,6 +115,22 @@ std::shared_ptr<Tileset> ResourceCache::loadTileset(const std::string& path)
 	{
 		m_tilesets.insert(std::make_pair(path, tileset));
 		return tileset;
+	}
+
+	return nullptr;
+}
+
+std::shared_ptr<MusicPlaylist> ResourceCache::loadPlaylist(const std::string & path)
+{
+	auto loadedPlaylist = m_playlists.find(path);
+	if(loadedPlaylist != m_playlists.end())
+		return loadedPlaylist->second;
+
+	std::shared_ptr<MusicPlaylist> playlist = std::make_shared<MusicPlaylist>();
+	if(playlist->loadFromFile(path, *this))
+	{
+		m_playlists.insert(std::make_pair(path, playlist));
+		return playlist;
 	}
 
 	return nullptr;

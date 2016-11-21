@@ -76,9 +76,14 @@ void HighscoreManager::add(std::string name, int score)
 		return;
 	}
 
-	for(int i = 0; i < m_highscores.size(); i++)
+	for(int i = 0; i < m_maxHighscores; i++)
 	{
-		if(score >= m_highscores[i].score)
+		if(i >= m_highscores.size())
+		{
+			m_highscores.push_back({ name, score });
+			return;
+		}
+		else if(score >= m_highscores[i].score)
 		{
 			for(int k = m_highscores.size() - 1; k >= i; k--)
 			{
@@ -94,7 +99,7 @@ void HighscoreManager::add(std::string name, int score)
 			}
 
 			m_highscores[i] = { name, score };
-			break;
+			return;
 		}
 	}
 }

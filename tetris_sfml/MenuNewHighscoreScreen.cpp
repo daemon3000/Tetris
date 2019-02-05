@@ -25,8 +25,8 @@ bool MenuNewHighscoreScreen::create(ResourceCache &resourceCache)
 	m_panel = std::make_shared<tgui::Panel>();
 	m_panel->setPosition(sf::Vector2f(0, 0));
 	m_panel->setSize(sf::Vector2f(640.0f, 640.0f));
-	m_panel->hide();
-	m_panel->disable();
+	m_panel->setVisible(false);
+	m_panel->setEnabled(false);
 	m_gui->add(m_panel);
 
 	if(!createBackgroundPanel(resourceCache))
@@ -53,7 +53,7 @@ bool MenuNewHighscoreScreen::createBackgroundPanel(ResourceCache &resourceCache)
 	if(atlas != nullptr)
 	{
 		tgui::Picture::Ptr bg = std::make_shared<tgui::Picture>();
-		bg->setTexture({ *atlas, sf::IntRect(4, 4, 120, 120), sf::IntRect(16, 65, 88, 38) });
+		bg->getRenderer()->setTexture({ *atlas, sf::IntRect(4, 4, 120, 120), sf::IntRect(16, 65, 88, 38) });
 		bg->setPosition(sf::Vector2f(10.0f, 160.0f));
 		bg->setSize(sf::Vector2f(364.0f, 320.0f));
 		m_panel->add(bg);
@@ -174,25 +174,25 @@ void MenuNewHighscoreScreen::saveNewHighscore()
 void MenuNewHighscoreScreen::onFocusEnter()
 {
 	MenuState::onFocusEnter();
-	m_panel->enable();
+	m_panel->setEnabled(true);
 }
 
 void MenuNewHighscoreScreen::onFocusExit()
 {
 	MenuState::onFocusExit();
-	m_panel->disable(false);
+	m_panel->setEnabled(false);
 }
 
 void MenuNewHighscoreScreen::onShow()
 {
 	MenuState::onShow();
-	m_panel->show();
+	m_panel->setVisible(true);
 }
 
 void MenuNewHighscoreScreen::onHide()
 {
 	MenuState::onHide();
-	m_panel->hide();
+	m_panel->setVisible(false);
 }
 
 std::string MenuNewHighscoreScreen::getID() const

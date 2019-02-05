@@ -32,12 +32,12 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 
 	m_game->gameOver.connect([this]()
 	{
-		m_gameOverLabel->show();
+		m_gameOverLabel->setVisible(true);
 	});
 
 	m_game->gameStarted.connect([this]()
 	{
-		m_gameOverLabel->hide();
+		m_gameOverLabel->setVisible(false);
 	});
 
 	m_clickSound.setBuffer(*clickSound);
@@ -45,8 +45,8 @@ bool MenuHomeScreen::create(ResourceCache &resourceCache)
 	m_panel = std::make_shared<tgui::Panel>();
 	m_panel->setPosition(sf::Vector2f(0, 0));
 	m_panel->setSize(sf::Vector2f(640.0f, 640.0f));
-	m_panel->hide();
-	m_panel->disable();
+	m_panel->setVisible(false);
+	m_panel->setEnabled(false);
 	m_gui->add(m_panel);
 
 	if(!createBackgroundPanel(resourceCache))
@@ -73,7 +73,7 @@ bool MenuHomeScreen::createBackgroundPanel(ResourceCache &resourceCache)
 	if(atlas != nullptr)
 	{
 		tgui::Picture::Ptr bg = std::make_shared<tgui::Picture>();
-		bg->setTexture({ *atlas, sf::IntRect(4, 126, 100, 100), sf::IntRect(20, 20, 60, 60) });
+		bg->getRenderer()->setTexture({ *atlas, sf::IntRect(4, 126, 100, 100), sf::IntRect(20, 20, 60, 60) });
 		bg->setPosition(sf::Vector2f(384.0f, 0.0f));
 		bg->setSize(sf::Vector2f(256.0f, 640.0f));
 		m_panel->add(bg);
@@ -259,7 +259,7 @@ bool MenuHomeScreen::createGameOverLabel()
 	m_gameOverLabel->setPosition(sf::Vector2f(414.0f, 410.0f));
 	m_gameOverLabel->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Center);
 	m_gameOverLabel->getRenderer()->setTextColor({ 255, 102, 0, 255 });
-	m_gameOverLabel->hide();
+	m_gameOverLabel->setVisible(false);
 
 	m_panel->add(m_gameOverLabel);
 	return true;
@@ -276,25 +276,25 @@ void MenuHomeScreen::onUpdate(float deltaTime)
 void MenuHomeScreen::onFocusEnter()
 {
 	MenuState::onFocusEnter();
-	m_panel->enable();
+	m_panel->setEnabled(true);
 }
 
 void MenuHomeScreen::onFocusExit()
 {
 	MenuState::onFocusExit();
-	m_panel->disable(false);
+	m_panel->setEnabled(false);
 }
 
 void MenuHomeScreen::onShow()
 {
 	MenuState::onShow();
-	m_panel->show();
+	m_panel->setVisible(true);
 }
 
 void MenuHomeScreen::onHide()
 {
 	MenuState::onHide();
-	m_panel->hide();
+	m_panel->setVisible(false);
 }
 
 void MenuHomeScreen::onRender()

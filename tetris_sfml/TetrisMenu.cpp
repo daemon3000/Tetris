@@ -27,11 +27,14 @@ bool TetrisMenu::create(TetrisGame *game, ResourceCache &resourceCache)
 	auto newHighscoreScreen = std::make_shared<MenuNewHighscoreScreen>(game, m_stateMachine);
 	auto homeScreen = std::make_shared<MenuHomeScreen>(game, m_stateMachine);
 	
-	m_gui->setWindow(*app->getWindow());
+	m_gui->setTarget(*app->getWindow());
 	m_gui->setView(sf::View({ 0.0f, 0.0f, 640.0f, 640.0f }));
 
 	if(font != nullptr)
 		m_gui->setFont(*font);
+
+	if(!homeScreen->create(resourceCache))
+		return false;
 
 	if(!aboutScreen->create(resourceCache))
 		return false;
@@ -40,9 +43,6 @@ bool TetrisMenu::create(TetrisGame *game, ResourceCache &resourceCache)
 		return false;
 
 	if(!newHighscoreScreen->create(resourceCache))
-		return false;
-
-	if(!homeScreen->create(resourceCache))
 		return false;
 
 	m_stateMachine->registerState(aboutScreen);

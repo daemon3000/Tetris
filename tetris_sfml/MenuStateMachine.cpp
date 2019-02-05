@@ -11,7 +11,7 @@ MenuStateMachine::MenuStateMachine() :
 	m_renderOrderStart(0)
 {
 	auto app = Application::getInstance();
-	m_gui->setWindow(*app->getWindow());
+	m_gui->setTarget(*app->getWindow());
 	m_gui->setView(sf::View({ 0.0f, 0.0f, 640.0f, 640.0f }));
 }
 

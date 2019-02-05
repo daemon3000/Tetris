@@ -1,0 +1,1 @@
+Download the [SFML 2.5.1](https://www.sfml-dev.org/download/sfml/2.5.1/) and [TGUI 0.8.3](https://github.com/texus/TGUI/releases) binaries and unzip them in this folder. The binaries **must** be for the **Visual C++ 15 (2017) - 32-bit** compiler.

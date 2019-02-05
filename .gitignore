@@ -6,10 +6,10 @@
 *.ads
 
 #Junk Folders
-x64*
-.vs*
-Debug*
-Release*
-Build*
-third_party*
-saves*
+**/x64
+/.vs
+**/Build/
+**/Debug/
+**/Release/
+**/saves/
+/third_party/**/

@@ -2,7 +2,7 @@ Distributed under the terms of an MIT-style license:
 
 The MIT License
 
-Copyright (c) 2016 Cristian Alexandru Geambasu(daemon3000@hotmail.com)
+Copyright (c) 2016-2019 Cristian Alexandru Geambasu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
 and associated documentation files (the "Software"), to deal in the Software without restriction, 
